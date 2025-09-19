@@ -1,0 +1,1 @@
+# Package utilitaire commun

@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "axiopoc"
+version = "0.1.0"
+description = "PoC axiodynamique: appetition_aversion, memotion_decay, negentropy_telotopic"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+ntel = "negentropy_telotopic.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+# indique explicitement quels packages Python installer
+packages = [
+  "appetition_aversion",
+  "memotion_decay",
+  "negentropy_telotopic",
+  "common",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+pythonpath = ["."]
