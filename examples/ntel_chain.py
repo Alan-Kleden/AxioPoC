@@ -48,6 +48,10 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--no-header", action="store_true", help="N'affiche pas l'entête")
     p.add_argument("--plot", action="store_true",
                    help="Trace R(t) (nécessite matplotlib, non installé par défaut)")
+    p.add_argument("--save-fig", type=str, default=None,
+               help="Chemin image pour sauvegarder la figure (ex: out/rt_series.png)")
+    p.add_argument("--dpi", type=int, default=180, help="DPI de la figure sauvegardée")
+
     return p.parse_args()
 
 def build_agents(base: List[Dict]) -> List[Dict]:
@@ -137,18 +141,28 @@ def main():
         if csv_file:
             csv_file.close()
 
-    if args.plot:
+    need_plot = args.plot or (args.save_fig is not None)
+    if need_plot:
         try:
             import matplotlib.pyplot as plt
         except ImportError:
             raise SystemExit("Matplotlib n'est pas installé. Fais: python -m pip install matplotlib")
+
         plt.figure()
         plt.plot(t_values, r_values, marker="o")
         plt.xlabel("t")
         plt.ylabel("R(t)")
         plt.title("Cohérence télotopique R(t)")
         plt.grid(True)
-        plt.show()
+
+        if args.save_fig:
+            out_img = Path(args.save_fig)
+            out_img.parent.mkdir(parents=True, exist_ok=True)
+            plt.savefig(out_img, dpi=args.dpi, bbox_inches="tight")
+        if args.plot and not args.save_fig:
+            plt.show()
+        plt.close()
+
 
 if __name__ == "__main__":
     main()
