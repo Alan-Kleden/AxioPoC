@@ -24,3 +24,8 @@ Thumbs.db
 /out/
 
 /out/
+
+# benchmark data & outputs
+/data/
+/out/
+
