@@ -11,28 +11,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-
       - name: Upgrade pip & build tools
         run: |
           python -m pip install -U pip wheel hatchling
-
-      # 👉 Installe toutes les dépendances utilisées par les tests/benchmarks
       - name: Install requirements
         run: |
           python -m pip install -r requirements.txt
-
       - name: Show environment
         run: |
           python -V
           pip list
-
       - name: Run pytest
         env:
-          MPLBACKEND: Agg   # évite les backends graphiques
+          MPLBACKEND: Agg
         run: |
           python -m pytest -q
