@@ -7,7 +7,6 @@ import pathlib
 
 def _write_toy_csv(path: pathlib.Path):
     rows = [
-        # thread_id, stance, outcome, timestamp
         ("t1",  1, 1, "2024-01-01T12:00:00Z"),
         ("t1",  1, 1, "2024-01-01T13:00:00Z"),
         ("t1", -1, 1, "2024-01-01T14:00:00Z"),
@@ -24,30 +23,49 @@ def _write_toy_csv(path: pathlib.Path):
         w.writerows(rows)
 
 def test_benchmark_a_end_to_end(tmp_path: pathlib.Path):
-    # On travaille dans un dossier isolé pour ne rien salir
+    # Répertoire racine du repo (tests/ -> ..)
+    repo_root = pathlib.Path(__file__).resolve().parents[1]
+
+    # Données & artefacts CSV dans un dossier temporaire isolé
     workdir = tmp_path
     data_csv = workdir / "toy.csv"
-    out_dir = workdir / "out"
-    out_dir.mkdir(parents=True, exist_ok=True)
+    out_tmp = workdir / "out"
+    out_tmp.mkdir(parents=True, exist_ok=True)
     _write_toy_csv(data_csv)
+
+    # Le script enregistre la figure dans "out/mean_rt.png" RELATIF AU CWD
+    # On lance donc le sous-processus depuis la racine du repo (import OK, chemins relatifs connus)
+    expected_plot = repo_root / "out" / "mean_rt.png"
+    if expected_plot.exists():
+        expected_plot.unlink()  # nettoyage si un ancien run a laissé un fichier
 
     cmd = [
         sys.executable, "-m", "benchmarks.rfa_ntel",
         "--input", str(data_csv),
-        "--msg-window", "2",           # petites fenêtres pour générer plusieurs points
+        "--msg-window", "2",
         "--ntel-mode", "R",
         "--plot-mean-rt",
-        "--save-features", str(out_dir / "features.csv"),
+        "--save-features", str(out_tmp / "features.csv"),
     ]
     env = os.environ.copy()
     env["MPLBACKEND"] = "Agg"
 
-    # IMPORTANT : on exécute dans workdir pour que "out/mean_rt.png" sorte là-bas
     result = subprocess.run(
-        cmd, capture_output=True, text=True, env=env, cwd=str(workdir), timeout=90
+        cmd,
+        capture_output=True,
+        text=True,
+        env=env,
+        cwd=str(repo_root),           # <<< racine du repo (module importable)
+        timeout=120,
     )
     assert result.returncode == 0, f"Process failed:\nSTDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}"
 
     # Artefacts attendus
-    assert (out_dir / "features.csv").exists(), "features.csv is missing"
-    assert (out_dir / "mean_rt.png").exists(), "mean_rt.png is missing"
+    assert (out_tmp / "features.csv").exists(), "features.csv is missing"
+    assert expected_plot.exists(), "mean_rt.png is missing"
+
+    # Nettoyage léger du plot pour ne pas salir le repo local/CI
+    try:
+        expected_plot.unlink()
+    except Exception:
+        pass
