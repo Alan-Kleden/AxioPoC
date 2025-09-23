@@ -42,3 +42,6 @@ Ce fichier consigne chaque exécution significative : **commit hash**, **command
   artifacts:
     features: out/rfa_features_m20_early.csv
     plot:     out/mean_rt.png
+
+
+- CI fix: add scikit-learn to requirements
