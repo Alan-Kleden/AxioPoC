@@ -33,3 +33,14 @@ Thumbs.db
 coverage.xml
 
 htmlcov/
+
+# --- AxioPoC local heavy stuff ---
+# artefacts (on garde UNIQUEMENT la release finale)
+artifacts_*/
+!artifacts_benchB_final/**
+
+# jeux & dumps locaux
+data/**
+
+# logs
+*.log

@@ -1,3 +1,5 @@
+![ci](https://github.com/Alan-Kleden/AxioPoC/actions/workflows/ci.yml/badge.svg)
+
 # AxioPoC
 
 **Mini-PoC** pour expérimenter les briques de calcul liées à l’axiodynamique :
