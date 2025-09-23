@@ -44,3 +44,7 @@ data/**
 
 # logs
 *.log
+
+# env de test résiduel
+.venv_pkgtest/
+
