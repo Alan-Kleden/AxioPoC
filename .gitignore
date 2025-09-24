@@ -1,50 +1,35 @@
+﻿# artifacts
+/artifacts_*/
+/artifacts*/
 # Python
 .venv/
 __pycache__/
 *.pyc
 .pytest_cache/
 .ipynb_checkpoints/
-
 # Build / dist
 dist/
 build/
 *.egg-info/
 .coverage
-
 # IDE / OS
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
-
 # outputs
 /out/
-
-# outputs
-/out/
-
-/out/
-
 # benchmark data & outputs
 /data/
-/out/
-
-
 coverage.xml
-
 htmlcov/
-
 # --- AxioPoC local heavy stuff ---
 # artefacts (on garde UNIQUEMENT la release finale)
 artifacts_*/
 !artifacts_benchB_final/**
-
 # jeux & dumps locaux
 data/**
-
 # logs
 *.log
-
-# env de test résiduel
+# env de test rÃ©siduel
 .venv_pkgtest/
-
