@@ -7,7 +7,7 @@ Fichiers :
 - C:\AxioPoC\artifacts_benchAfd_final_vader\features_eval.csv (features alignés)
 - C:\AxioPoC\data\wikipedia\afd\afd_eval.csv (labels alignés)
 
-**Features.** R(t) via enchmarks/text2ntel.py (backend **VADER**), fenêtres **w20** & **w10** → R_mean, R_last, R_slope.  
+**Features.** R(t) via Benchmarks/text2ntel.py (backend **VADER**), fenêtres **w20** & **w10** → R_mean, R_last, R_slope.  
 (Option CMV-like : ajout len_mean, qmark_ratio.)
 
 ## Résultats (CV×reps, sets équilibrés 50/50)
@@ -33,5 +33,5 @@ R_mean_w20 (0.0622) > R_last_w20 (0.0557) > R_mean_w10 (0.0443) > R_last_w10 (0.
 ## Prochaines étapes possibles
 - Passer les RF en **5×5** pour des écarts-types « définitifs ».  
 - Transfert **CMV→AfD** (et inverse) avec --export-model / --import-model.  
-- Tester l’apport marginal d’autres features (hedges/politesse, R_iqr, 	s_slope_early, etc.).
+- Tester l’apport marginal d’autres features (hedges/politesse, R_iqr, ts_slope_early, etc.).
 
