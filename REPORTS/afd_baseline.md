@@ -60,3 +60,12 @@ python .\scripts\eval_import_model.py `
 
 **Résultat (réel)** : CMV→AfD (LogReg len+q) = **AUC 0.5003**, **ACC 0.5020** (n = 279 636).
 **Conclusion.** Pas de généralisation détectable avec ces 2 features seulement.
+
+## Transfert CMV↔AfD — synthèse rapide
+
+- CMV→AfD (LogReg, 2 cols) : AUC 0.5003, ACC 0.5020 (n=279 636).
+- AfD→CMV (RF, 2 cols) : AUC 0.5038, ACC 0.5063 (n=640).
+- CMV→AfD (RF, 5 cols proxy) : AUC 0.5011, ACC 0.5019 (n=279 636).
+- AfD→CMV (RF, 5 cols proxy) : AUC 0.5057, ACC 0.5172 (n=640).
+
+Conclusion : transfert quasi nul CMV→AfD ; léger signal AfD→CMV (≈0.506).
