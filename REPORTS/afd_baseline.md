@@ -69,3 +69,16 @@ python .\scripts\eval_import_model.py `
 - AfD→CMV (RF, 5 cols proxy) : AUC 0.5057, ACC 0.5172 (n=640).
 
 Conclusion : transfert quasi nul CMV→AfD ; léger signal AfD→CMV (≈0.506).
+
+## Signatures & Distance axiologique (Dₐ, métrique = σ⁻¹)
+
+**Définition.** Pour chaque communauté C, on calcule une signature `μ_C, Σ_C` sur des features harmonisés.  
+La distance axiologique est : \( D_a(x;C) = \sqrt{(x - \mu_C)^\top M_C (x - \mu_C)} \) avec ici \( M_C = (\Sigma_C + \varepsilon I)^{-1} \) (Mahalanobis régularisée).
+
+### Résultats (σ⁻¹)
+- **Intra CMV** : AUC **0.522 ± 0.031**, ACC **0.512 ± 0.018**  
+- **Intra AfD** : AUC **0.499 ± 0.002**, ACC **0.502 ± 0.000**  
+- **Transfert AfD→CMV** : AUC **0.524**, ACC **0.488**  
+- **Transfert CMV→AfD** : AUC **0.499**, ACC **0.499**
+
+**Lecture.** Dₐ saisit un *petit* alignement affectivo-axiologique **dans CMV** et un **transfert faiblement positif vers CMV** quand le modèle est entraîné sur AfD ; **pas de signal** en sens inverse. Cela conforte l’idée de **signatures locales** dominantes et d’un chevauchement limité exploitable côté CMV.
