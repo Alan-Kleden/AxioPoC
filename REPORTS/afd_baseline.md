@@ -35,3 +35,28 @@ R_mean_w20 (0.0622) > R_last_w20 (0.0557) > R_mean_w10 (0.0443) > R_last_w10 (0.
 - Transfert **CMV→AfD** (et inverse) avec --export-model / --import-model.  
 - Tester l’apport marginal d’autres features (hedges/politesse, R_iqr, ts_slope_early, etc.).
 
+## Transfert CMV→AfD (généralisation, modèle CMV importé tel quel)
+
+**Setup.** Entraînement sur **CMV** (features communs : `len_mean,qmark_ratio`, LogReg + scaler), import du modèle sur **AfD** sans réentraînement.
+
+**Cmd export (CMV)**
+```powershell
+python .\scripts\train_export_model.py `
+  --feat artifacts_benchB_final\features.csv `
+  --raw  data\convokit\cmv\cmv_balanced.csv `
+  --cols len_mean,qmark_ratio `
+  --model logreg --cv 5 --reps 5 --scale `
+  --export-model artifacts_xfer\logreg_lenq_cmv.pkl
+```
+
+**Cmd import+test (AfD)**
+```powershell
+python .\scripts\eval_import_model.py `
+  --feat artifacts_benchAfd_final_vader\features_eval_plus.csv `
+  --raw  data\wikipedia\afd\afd_eval.csv `
+  --cols len_mean,qmark_ratio `
+  --import-model artifacts_xfer\logreg_lenq_cmv.pkl
+```
+
+**Résultat (réel)** : CMV→AfD (LogReg len+q) = **AUC 0.5003**, **ACC 0.5020** (n = 279 636).
+**Conclusion.** Pas de généralisation détectable avec ces 2 features seulement.
