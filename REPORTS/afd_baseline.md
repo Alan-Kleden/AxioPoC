@@ -82,3 +82,17 @@ La distance axiologique est : \( D_a(x;C) = \sqrt{(x - \mu_C)^\top M_C (x - \mu_
 - **Transfert CMV→AfD** : AUC **0.499**, ACC **0.499**
 
 **Lecture.** Dₐ saisit un *petit* alignement affectivo-axiologique **dans CMV** et un **transfert faiblement positif vers CMV** quand le modèle est entraîné sur AfD ; **pas de signal** en sens inverse. Cela conforte l’idée de **signatures locales** dominantes et d’un chevauchement limité exploitable côté CMV.
+
+### Distance axiologique (Dₐ) — comparaison de métriques
+
+**Métriques testées :**
+- `σ⁻¹` (Mahalanobis régularisée) : \( M_C = (\Sigma_C + \varepsilon I)^{-1} \)
+- `diag` (euclidienne simple) : \( M_C = I \)
+
+**Résultats :**
+- Intra CMV — AUC **0.525 ± 0.028** (diag) vs **0.522 ± 0.031** (σ⁻¹) ; ACC ~0.512 (idem)
+- Intra AfD — AUC **0.501 ± 0.003** (diag) vs **0.499 ± 0.002** (σ⁻¹)
+- Transfert AfD→CMV — AUC **0.5255** (diag) vs **0.5243** (σ⁻¹), ACC ~0.49 (seuil non calibré)
+- Transfert CMV→AfD — AUC **0.5012** (diag) vs **0.4995** (σ⁻¹)
+
+**Conclusion.** Les corrélations (Σ⁻¹) n’améliorent pas l’alignement axio-affectif inter-communautés ; la version **diag** (plus simple) est **légèrement supérieure** et plus stable. Nous retenons **Dₐ[diag]** par défaut pour la suite.
