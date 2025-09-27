@@ -33,3 +33,28 @@ data/**
 *.log
 # env de test rÃ©siduel
 .venv_pkgtest/
+
+# === AxioPoC ignore (consolidated) ===
+# Données & artefacts lourds
+data/
+artifacts_*/
+artifacts_xfer/
+*.pkl
+*.npz
+*.npy
+*.log
+
+# Backups locaux & caches
+data_bak_*/
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+
+# Environnements / IDE
+.venv/
+venv/
+.env
+.ipynb_checkpoints/
+.vscode/
+# === /AxioPoC ignore ===
