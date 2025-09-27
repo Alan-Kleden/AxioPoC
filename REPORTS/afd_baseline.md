@@ -121,3 +121,17 @@ La distance axiologique est : \( D_a(x;C) = \sqrt{(x - \mu_C)^\top M_C (x - \mu_
 - CMV → AfD : AUC **0.5012**, ACC **0.4989** (n_src=640, n_tgt=279 636)
 
 **Note.** Résultats stables ; asymétrie confirmée (AfD plus hétérogène / features peu informatives côté AfD).
+
+### Dₐ (10 colonnes : len_mean, qmark_ratio, R_proxy, R_last_proxy, R_slope_proxy, polite_ratio, hedge_ratio, you_i_ratio, agree_markers, neg_markers)
+
+**Intra-corpus**
+- CMV (LogReg sur Dₐ[diag]) : AUC **0.525 ± 0.028**, ACC **0.512 ± 0.018**
+- AfD (LogReg sur Dₐ[diag]) : AUC **0.501 ± 0.003**, ACC **0.502 ± 0.000**
+
+**Transfert**
+- AfD → CMV : AUC **0.5255**, ACC **0.4875** (n_src=279 636, n_tgt=640)
+- CMV → AfD : AUC **0.5012**, ACC **0.4989** (n_src=640, n_tgt=279 636)
+
+**Notes.**
+- Les 3 pragmatiques (*you_i_ratio, agree_markers, neg_markers*) étaient partiellement manquantes côté AfD ; elles ont été **renseignées** (calculs + `NaN→0`) puis **sanitisées** en entrée modèle (`nan_to_num`).
+- Aux échelles actuelles, **Dₐ(10) ≈ Dₐ(5)** : le signal **AfD→CMV** persiste (faible mais stable), **CMV→AfD** reste ≈ hasard, ce qui confirme l’**asymétrie de domaine**.
