@@ -135,3 +135,15 @@ La distance axiologique est : \( D_a(x;C) = \sqrt{(x - \mu_C)^\top M_C (x - \mu_
 **Notes.**
 - Les 3 pragmatiques (*you_i_ratio, agree_markers, neg_markers*) étaient partiellement manquantes côté AfD ; elles ont été **renseignées** (calculs + `NaN→0`) puis **sanitisées** en entrée modèle (`nan_to_num`).
 - Aux échelles actuelles, **Dₐ(10) ≈ Dₐ(5)** : le signal **AfD→CMV** persiste (faible mais stable), **CMV→AfD** reste ≈ hasard, ce qui confirme l’**asymétrie de domaine**.
+
+### Transfert CMV↔AfD — Dₐ(13) avec VADER (pos/neu/neg)
+
+**Colonnes (13)** : len_mean, qmark_ratio, R_proxy, R_last_proxy, R_slope_proxy, polite_ratio, hedge_ratio, you_i_ratio, agree_markers, neg_markers, vader_pos_mean, vader_neu_mean, vader_neg_mean.
+
+**Résultats (distance diag)**  
+- **Intra CMV** : AUC **0.525** ± 0.028, ACC 0.512 ± 0.018.  
+- **Intra AfD** : AUC **0.501**, ACC 0.502.  
+- **Transfert AfD→CMV** : AUC **0.525**, ACC 0.488.  
+- **Transfert CMV→AfD** : AUC **0.501**, ACC 0.499.
+
+**Lecture.** VADER a été intégré côté **AfD** (couverture pos≈79 %, neu≈90 %, neg≈82 %). Côté **CMV**, VADER est absent (colonnes nulles). L’asymétrie de couverture explique que l’ajout de VADER **n’améliore pas** le transfert CMV→AfD et n’impacte guère AfD→CMV : le signal vient toujours des 10 features communes. Pour exploiter VADER, il faudra le calculer aussi **côté CMV** à partir des messages.
