@@ -10,7 +10,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import roc_auc_score, accuracy_score
 import numpy as np
-Da = np.nan_to_num(Da, nan=0.0, posinf=0.0, neginf=0.0)
 
 
 EXCLUDE = {"thread_id","label"}
@@ -78,6 +77,9 @@ def main():
         w, w_cols = np.asarray(w_obj["w"], dtype=float), list(w_obj["cols"])
 
     Da = compute_da_matrix(X, mu, cov, metric=args.metric, w=w, cols=cols, w_cols=w_cols).reshape(-1,1)
+    # Sanitize: remplace NaN/Inf par 0 avant apprentissage
+    Da = np.nan_to_num(Da, nan=0.0, posinf=0.0, neginf=0.0)
+
 
     aucs, accs = [], []
     skf = StratifiedKFold(n_splits=args.cv, shuffle=True, random_state=42)

@@ -110,3 +110,14 @@ La distance axiologique est : \( D_a(x;C) = \sqrt{(x - \mu_C)^\top M_C (x - \mu_
 
 **Conclusion rapide.** Les marqueurs pragmatiques (10 cols) confirment l’asymétrie : **signal sur CMV**, **aléatoire sur AfD**. La Dₐ reste peu informative vers AfD → nécessité d’**enrichir** les features AfD (lexical/affectif/structure) ou de **conditionner par topic** pour réduire le mismatch de distribution.
 
+### Dₐ (5 colonnes : len_mean, qmark_ratio, R_proxy, R_last_proxy, R_slope_proxy)
+
+**Intra-corpus**
+- CMV (LogReg sur Dₐ[diag]) : AUC **0.525 ± 0.028**, ACC **0.512 ± 0.018**
+- AfD (LogReg sur Dₐ[diag]) : AUC **0.501 ± 0.003**, ACC **0.502 ± 0.000**
+
+**Transfert**
+- AfD → CMV : AUC **0.5255**, ACC **0.4875** (n_src=279 636, n_tgt=640)
+- CMV → AfD : AUC **0.5012**, ACC **0.4989** (n_src=640, n_tgt=279 636)
+
+**Note.** Résultats stables ; asymétrie confirmée (AfD plus hétérogène / features peu informatives côté AfD).

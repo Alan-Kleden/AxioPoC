@@ -72,6 +72,8 @@ def main():
 
     Das = compute_da(Xs, mu_s, cov_s, metric=args.metric, w=w, cols=cols_s, w_cols=w_cols).reshape(-1,1)
     Dat = compute_da(Xt, mu_t, cov_t, metric=args.metric, w=w, cols=cols_t, w_cols=w_cols).reshape(-1,1)
+    Das = np.nan_to_num(Das, nan=0.0, posinf=0.0, neginf=0.0)
+    Dat = np.nan_to_num(Dat, nan=0.0, posinf=0.0, neginf=0.0)
 
     clf = LogisticRegression(max_iter=2000).fit(Das, ys)
     p1 = clf.predict_proba(Dat)[:,1]
