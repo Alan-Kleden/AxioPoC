@@ -96,3 +96,17 @@ La distance axiologique est : \( D_a(x;C) = \sqrt{(x - \mu_C)^\top M_C (x - \mu_
 - Transfert CMV→AfD — AUC **0.5012** (diag) vs **0.4995** (σ⁻¹)
 
 **Conclusion.** Les corrélations (Σ⁻¹) n’améliorent pas l’alignement axio-affectif inter-communautés ; la version **diag** (plus simple) est **légèrement supérieure** et plus stable. Nous retenons **Dₐ[diag]** par défaut pour la suite.
+
+## Transfert CMV↔AfD — ajout pragmatiques (10 cols)
+
+**Signature (10)** : `len_mean, qmark_ratio, R_proxy, R_last_proxy, R_slope_proxy, polite_ratio, hedge_ratio, you_i_ratio, agree_markers, neg_markers`  
+**Imputation** : NaN→0 pour colonnes pragmatiques côté AfD.
+
+**Résultats**
+- **Intra CMV (diag)** : AUC **0.525 ± 0.028**, ACC **0.512 ± 0.018**
+- **Intra AfD (diag)** : AUC **0.501 ± 0.003**, ACC **0.502 ± 0.000**
+- **Transfert AfD→CMV (diag)** : AUC **0.5255**, ACC **0.4875**
+- **Transfert CMV→AfD (diag)** : AUC **0.5012**, ACC **0.4989**
+
+**Conclusion rapide.** Les marqueurs pragmatiques (10 cols) confirment l’asymétrie : **signal sur CMV**, **aléatoire sur AfD**. La Dₐ reste peu informative vers AfD → nécessité d’**enrichir** les features AfD (lexical/affectif/structure) ou de **conditionner par topic** pour réduire le mismatch de distribution.
+
