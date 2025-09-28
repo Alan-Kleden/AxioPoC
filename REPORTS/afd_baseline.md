@@ -192,3 +192,16 @@ _Fichiers :_ `REPORTS/metrics_consolidated.csv`, `REPORTS/img/auc_bars_Da13_diag
 Artifacts: REPORTS/metrics_consolidated.csv, REPORTS/img/auc_bars_Da13_diag.png
 
 **Permutation SAFE (AfD→CMV, Da13 diag, N=1000)** : AUC_réelle = 0.5255 ; distribution nulle m ≈ 0.499 (sd ≈ 0.023) ; p(one-sided)=0.124. Signal de transfert faible et non significatif (α=0.05). Lecture : tendance positive cohérente avec l’asymétrie observée, mais effet proche du hasard.
+
+**Permutation SAFE (AfD→CMV, Da13 diag, N=1000).** AUC_réelle = 0.5255 ; distribution nulle m ≈ 0.499 (sd ≈ 0.023) ; p(one-sided)=0.124. Signal faible et non significatif (α=0.05), cohérent avec une asymétrie marginale AfD→CMV.
+
+![Null vs Real](./img/perm_hist_vs_real_afd2cmv_Da13.png)
+
+**Ablations (AfD→CMV, Da13 diag).** 
+- Baseline Da13: AUC = 0.525.
+- Sans `len_mean`: AUC = 0.479 (↘︎ sous hasard) ⇒ la longueur explique une part substantielle du signal de transfert.
+- Sans `you_i_ratio`: AUC = 0.525 (≈ inchangé) ⇒ faible contribution du style pronominal.
+
+Conclusion : la **longueur** agit comme **confondeur principal**. Les autres indices (hedges, politesse, accords/désaccords, proxys R*, VADER) portent un signal résiduel **faible**.
+  
+![AUC — Da13 (diag + ablations)](./img/auc_bars_Da13_diag_with_ablations.png)
