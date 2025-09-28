@@ -190,3 +190,5 @@ _Fichiers :_ `REPORTS/metrics_consolidated.csv`, `REPORTS/img/auc_bars_Da13_diag
 - AfD→CMV (Da13 diag):   AUC 0.525 | ACC 0.488
 - CMV→AfD (Da13 diag):   AUC 0.501 | ACC 0.499
 Artifacts: REPORTS/metrics_consolidated.csv, REPORTS/img/auc_bars_Da13_diag.png
+
+**Permutation SAFE (AfD→CMV, Da13 diag, N=1000)** : AUC_réelle = 0.5255 ; distribution nulle m ≈ 0.499 (sd ≈ 0.023) ; p(one-sided)=0.124. Signal de transfert faible et non significatif (α=0.05). Lecture : tendance positive cohérente avec l’asymétrie observée, mais effet proche du hasard.
