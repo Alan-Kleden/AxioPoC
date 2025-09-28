@@ -141,9 +141,33 @@ La distance axiologique est : \( D_a(x;C) = \sqrt{(x - \mu_C)^\top M_C (x - \mu_
 **Colonnes (13)** : len_mean, qmark_ratio, R_proxy, R_last_proxy, R_slope_proxy, polite_ratio, hedge_ratio, you_i_ratio, agree_markers, neg_markers, vader_pos_mean, vader_neu_mean, vader_neg_mean.
 
 **Résultats (distance diag)**  
-- **Intra CMV** : AUC **0.525** ± 0.028, ACC 0.512 ± 0.018.  
-- **Intra AfD** : AUC **0.501**, ACC 0.502.  
-- **Transfert AfD→CMV** : AUC **0.525**, ACC 0.488.  
-- **Transfert CMV→AfD** : AUC **0.501**, ACC 0.499.
+- **Intra CMV** : AUC **0.525 ± 0.028**, ACC **0.512 ± 0.018**.  
+- **Intra AfD** : AUC **0.501 ± 0.003**, ACC **0.502 ± 0.000**.  
+- **Transfert AfD→CMV** : AUC **0.5255**, ACC **0.4875**.  
+- **Transfert CMV→AfD** : AUC **0.5012**, ACC **0.4989**.
 
-**Lecture.** VADER a été intégré côté **AfD** (couverture pos≈79 %, neu≈90 %, neg≈82 %). Côté **CMV**, VADER est absent (colonnes nulles). L’asymétrie de couverture explique que l’ajout de VADER **n’améliore pas** le transfert CMV→AfD et n’impacte guère AfD→CMV : le signal vient toujours des 10 features communes. Pour exploiter VADER, il faudra le calculer aussi **côté CMV** à partir des messages.
+**Couverture**  
+- CMV : `vader_*` désormais **non-zéro ≈ 100%** (VADER calculé sur cmv_messages, puis fusionné).  
+- AfD : `vader_*` **non-zéro** (déjà calculé précédemment).
+
+**Lecture.** Même après harmonisation de VADER des deux côtés, **l’asymétrie persiste** : **AfD→CMV** garde un petit signal (AUC ≈ **0.525**), **CMV→AfD** reste ≈ hasard. L’apport VADER est **redondant** avec d’autres indices côté AfD et ne suffit pas à compenser le mismatch de distribution côté AfD. Pistes : compléter les proxys nuls (you/I, agree/neg), pondérer les dimensions apprises sur la source, ou conditionner par topic.
+
+### Dₐ(13) — pragmatiques (10) + VADER (3)
+
+**Variables (13)** : `len_mean, qmark_ratio, R_proxy, R_last_proxy, R_slope_proxy, polite_ratio, hedge_ratio, you_i_ratio, agree_markers, neg_markers, vader_pos_mean, vader_neu_mean, vader_neg_mean`.
+
+**Couverture (sanity check)**  
+CMV : `vader_*` non-zéro ≈ 100% ; plusieurs proxys restent nuls (p. ex. `R_last_proxy=0%`, `R_slope_proxy=0%`, `you_i_ratio=0%`, `agree_markers=0%`, `neg_markers=0%`).  
+AfD : `vader_*` déjà non-zéro (cf. étape précédente).
+
+**Résultats transfert (diag)**  
+- **AfD → CMV (13D)** : **AUC 0.5255**, **ACC 0.4875** (n_src=279 636, n_tgt=640).  
+- **CMV → AfD (13D)** : **AUC 0.5012**, **ACC 0.4989** (n_src=640, n_tgt=279 636).
+
+> Remarque : l’intra-CMV reste ~0.525 AUC ; l’intra-AfD ~0.501 AUC (stables vs 10D).
+
+**Conclusion (13D)**  
+L’ajout de **VADER** côté CMV **confirme l’asymétrie** observée en 10D :  
+- Signal **AfD → CMV** modeste mais reproductible (AUC ≈ **0.525**).  
+- **CMV → AfD** ≈ aléatoire (AUC ≈ **0.501**).  
+L’absence de gain net suggère que VADER accroît surtout la **redondance** avec les indices déjà porteurs côté AfD. Côté CMV, plusieurs indicateurs restent **sparsifiés (0%)**, ce qui **limite le pouvoir de transfert**. Prochaines pistes : combler les proxys nuls (you/I, agree/neg markers), et/ou tester une **pondération de dimensions** apprise sur la source pour renforcer l’invariance.
