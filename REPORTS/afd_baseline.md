@@ -171,3 +171,22 @@ L’ajout de **VADER** côté CMV **confirme l’asymétrie** observée en 10D :
 - Signal **AfD → CMV** modeste mais reproductible (AUC ≈ **0.525**).  
 - **CMV → AfD** ≈ aléatoire (AUC ≈ **0.501**).  
 L’absence de gain net suggère que VADER accroît surtout la **redondance** avec les indices déjà porteurs côté AfD. Côté CMV, plusieurs indicateurs restent **sparsifiés (0%)**, ce qui **limite le pouvoir de transfert**. Prochaines pistes : combler les proxys nuls (you/I, agree/neg markers), et/ou tester une **pondération de dimensions** apprise sur la source pour renforcer l’invariance.
+
+**Da13 (diag) — Résultats et figure**
+
+- Intra-CMV (n=640) : **AUC 0.525 ± 0.028**, **ACC 0.512 ± 0.018**  
+- Intra-AfD (n=279 636) : **AUC 0.501 ± 0.003**, **ACC 0.502 ± 0.000**  
+- Transfert **AfD→CMV** : **AUC 0.525**, **ACC 0.488** (n_tgt=640)  
+- Transfert **CMV→AfD** : **AUC 0.501**, **ACC 0.499** (n_tgt=279 636)
+
+Ces résultats confirment une **asymétrie de domaine** : signal **faible mais reproductible** pour **AfD→CMV**, nul pour **CMV→AfD**. L’hétérogénéité d’AfD semble capturer un espace axiopragmatique plus large, partiellement transférable vers CMV.
+
+![AUC — Da13 (diag)](./img/auc_bars_Da13_diag.png)
+
+_Fichiers :_ `REPORTS/metrics_consolidated.csv`, `REPORTS/img/auc_bars_Da13_diag.png`.
+### Run log — 2025-09-28
+- Intra CMV (Da13 diag): AUC 0.525 ± 0.028 | ACC 0.512 ± 0.018
+- Intra AfD (Da13 diag): AUC 0.501 ± 0.003 | ACC 0.502 ± 0.000
+- AfD→CMV (Da13 diag):   AUC 0.525 | ACC 0.488
+- CMV→AfD (Da13 diag):   AUC 0.501 | ACC 0.499
+Artifacts: REPORTS/metrics_consolidated.csv, REPORTS/img/auc_bars_Da13_diag.png

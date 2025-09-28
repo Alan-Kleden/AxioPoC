@@ -1,0 +1,5 @@
+file,dataset,setting,direction,signature,model,cv,reps,n,auc_mean,auc_sd,acc_mean,acc_sd,timestamp
+metrics_intra_afd_Da13_diag.json,AfD,intra,intra,Da13_diag,logreg,5.0,3.0,,0.501,0.003,0.502,0.0,2025-09-28T09:59:58.603718
+metrics_intra_cmv_Da13_diag.json,CMV,intra,intra,Da13_diag,logreg,5.0,3.0,,0.525,0.028,0.512,0.018,2025-09-28T09:59:55.692488
+metrics_afd2cmv_Da13_diag.json,CMV,transfer,afd->cmv,Da13_diag,logreg,,,640.0,0.525475,,0.4875,,2025-09-28T10:02:31.327102
+metrics_cmv2afd_Da13_diag.json,AfD,transfer,cmv->afd,Da13_diag,logreg,,,279636.0,0.501203,,0.498916,,2025-09-28T10:02:32.975054
