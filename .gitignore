@@ -1,60 +1,50 @@
-﻿# artifacts
-/artifacts_*/
-/artifacts*/
-# Python
-.venv/
-__pycache__/
-*.pyc
-.pytest_cache/
-.ipynb_checkpoints/
-# Build / dist
-dist/
-build/
-*.egg-info/
-.coverage
-# IDE / OS
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-# outputs
-/out/
-# benchmark data & outputs
-/data/
-coverage.xml
-htmlcov/
-# --- AxioPoC local heavy stuff ---
-# artefacts (on garde UNIQUEMENT la release finale)
-artifacts_*/
-!artifacts_benchB_final/**
-# jeux & dumps locaux
-data/**
-# logs
-*.log
-# env de test rÃ©siduel
-.venv_pkgtest/
+﻿# --- START .gitignore (Optimized Final PoC) ---
 
-# === AxioPoC ignore (consolidated) ===
-# Données & artefacts lourds
-data/
-artifacts_*/
-artifacts_xfer/
+# 1) Artefacts lourds / binaires de données (toujours hors repo)
+*.parquet
 *.pkl
 *.npz
 *.npy
-*.log
+*_emb_*.parquet
+artifacts_xfer/
 
-# Backups locaux & caches
-data_bak_*/
-*.tmp
-*.bak
-.DS_Store
-Thumbs.db
+# 2) Jeux de données & sorties massives (ignorer par défaut, sauf dossier final)
+#   - on ignore des sous-rapports verbeux…
+REPORTS/temporal_explore/*.csv
+REPORTS/holdout_*/**
+REPORTS/face_validity/**/top*_messages.csv
+REPORTS/face_validity/**/bottom*_messages.csv
+#   - on ignore les CSV génériques dans REPORTS…
+REPORTS/*.csv
+#   …mais on GARDE tout ce qui est dans le paquet final :
+!REPORTS/final_poc_afD/**
+#   (les règles d’exception doivent venir APRÈS les règles d’ignore)
 
-# Environnements / IDE
+# 3) Caches / venv / logs
 .venv/
 venv/
-.env
+__pycache__/
+*.log
+*.tmp
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
 .ipynb_checkpoints/
+
+# 4) Archives locales & backups
+*_archive*/
+_quarantine*/
+*.zip
+*.bak
+
+# 5) IDE / OS / secrets
+.DS_Store
+Thumbs.db
 .vscode/
-# === /AxioPoC ignore ===
+.idea/
+*.env
+.env*
+
+# --- END .gitignore ---

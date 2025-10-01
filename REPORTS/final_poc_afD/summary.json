@@ -1,0 +1,24 @@
+{
+  "emb_path": "H:\\AxioPoC\\artifacts_xfer\\afd_msg_emb_PARTIAL.parquet",
+  "axis_path": "C:\\AxioPoC\\artifacts_xfer\\axis_afd.npy",
+  "labels_path": "C:\\AxioPoC_Data\\data\\wikipedia\\afd\\afd_eval.csv",
+  "texts_path": "C:\\AxioPoC\\artifacts_xfer\\afd_messages_filtered.csv",
+  "thread_col": "thread_id",
+  "label_col": "label",
+  "emb_prefix": "e",
+  "min_msgs": 5,
+  "score_mode": "cos",
+  "agg_mode": "mean",
+  "test_size": 0.2,
+  "seed": 0,
+  "n_threads_kept": 66175,
+  "label_counts": {
+    "1": 33158,
+    "0": 33017
+  },
+  "auc_train": 0.49792924866525845,
+  "auc_test": 0.4983220675728235,
+  "acc_train": 0.5016433698526634,
+  "acc_test": 0.4981488477521723,
+  "thr_opt_youden": -0.10385613143444061
+}

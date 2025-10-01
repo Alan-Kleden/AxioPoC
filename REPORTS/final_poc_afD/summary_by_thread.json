@@ -1,0 +1,24 @@
+{
+  "emb_path": "H:\\AxioPoC\\artifacts_xfer\\afd_msg_emb_PARTIAL.parquet",
+  "axis_path": "C:\\AxioPoC\\artifacts_xfer\\axis_afd.npy",
+  "texts_path": "G:\\Mon Drive\\AxioPoC\\artifacts_xfer\\afd_messages.csv",
+  "labels_path": "C:\\AxioPoC\\data\\wikipedia\\afd\\afd_eval.csv",
+  "score_metric": "cos",
+  "agg": "mean",
+  "min_msgs": 10,
+  "n_threads_scored": 27357,
+  "topk": 50,
+  "top_counts_[label1,label0]": [
+    22,
+    28
+  ],
+  "bot_counts_[label1,label0]": [
+    24,
+    26
+  ],
+  "test": "chi2",
+  "p_value": 0.6882094395496217,
+  "chi2": 0.1610305958132045,
+  "odds_ratio": 0.8539205155746509,
+  "delta_pp_label1_top_minus_bottom": -3.999999999920001
+}
