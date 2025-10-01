@@ -1,5 +1,4 @@
 ﻿* text=auto
-
 # Texte (toujours LF)
 *.py    text eol=lf
 *.md    text eol=lf
@@ -13,13 +12,11 @@
 *.cfg   text eol=lf
 *.txt   text eol=lf
 *.svg   text eol=lf
-
 # Scripts Windows (CRLF requis)
 *.ps1   text eol=crlf
 *.bat   text eol=crlf
-
 # Binaires / artefacts (pas de normalisation)
-*.png   binary
+*.png filter=lfs diff=lfs merge=lfs -text
 *.jpg   binary
 *.jpeg  binary
 *.gif   binary
